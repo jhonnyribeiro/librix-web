@@ -3,12 +3,10 @@ import '@/assets/modernize/libs/jquery/dist/jquery.min.js'
 import '@/assets/modernize/libs/bootstrap/dist/js/bootstrap.bundle.min.js'
 import '@/assets/modernize/js/sidebarmenu.js'
 import '@/assets/modernize/js/app.min.js'
-import '@/assets/modernize/libs/apexcharts/dist/apexcharts.min.js'
 import '@/assets/modernize/libs/simplebar/dist/simplebar.js'
-import '@/assets/modernize/js/dashboard.js'
+
 import Sidebar from '@/components/SidebarTemplate.vue'
 import Footer from '@/components/FooterTemplate.vue'
-import DashboardView from '@/views/DashboardView.vue'
 import Header from '@/components/HeaderTemplate.vue'
 </script>
 
@@ -32,7 +30,7 @@ import Header from '@/components/HeaderTemplate.vue'
       <Header />
       <!--  Header End -->
       <div class="container-fluid">
-        <DashboardView />
+        <RouterView />
         <Footer />
       </div>
     </div>

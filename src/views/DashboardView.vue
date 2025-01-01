@@ -1,3 +1,7 @@
+<script setup>
+import '@/assets/modernize/libs/apexcharts/dist/apexcharts.min.js'
+import '@/assets/modernize/js/dashboard.js'
+</script>
 <template>
   <!--  Row 1 -->
   <div class="row">
