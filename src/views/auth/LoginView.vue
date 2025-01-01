@@ -1,11 +1,14 @@
 <script setup>
 import axios from 'axios'
 import { ref } from 'vue'
+import {useRouter} from 'vue-router'
+import router from '@/router/index.js'
 
 const email = ref('test@example.com')
 const password = ref('password')
 const feedbackMessage = ref('')
 const loading = ref(false)
+
 
 function login() {
   feedbackMessage.value = ''
@@ -18,6 +21,9 @@ function login() {
       .post('http://127.0.0.1:8000/api/login', {
         email: email.value,
         password: password.value,
+      })
+      .then(()=>{
+        router.push({name:'dashboard'});
       })
       .catch(() => {
         feedbackMessage.value = 'E-mail ou senha inválidos!'
