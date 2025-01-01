@@ -4,15 +4,22 @@ import { ref } from 'vue'
 
 const email = ref('test@example.com')
 const password = ref('password')
+const feedbackMessage = ref('')
 
 function login() {
+  feedbackMessage.value = '';
+
   axios.defaults.withCredentials = true
   axios.defaults.withXSRFToken = true
   axios.get('http://127.0.0.1:8000/sanctum/csrf-cookie').then(() => {
-    axios.post('http://127.0.0.1:8000/api/login', {
-      email: email.value,
-      password: password.value,
-    })
+    axios
+      .post('http://127.0.0.1:8000/api/login', {
+        email: email.value,
+        password: password.value,
+      })
+      .catch(() => {
+        feedbackMessage.value = 'E-mail ou senha inválidos!'
+      })
   })
 }
 </script>
@@ -43,7 +50,10 @@ function login() {
                   <img src="@/assets/modernize/images/logos/dark-logo.svg" width="180" alt="" />
                 </router-link>
                 <p class="text-center">Seu controle de livros</p>
-                <form>
+                <form @submit.prevent="login()">
+                  <div v-if="feedbackMessage" class="alert alert-danger" role="alert">
+                    {{ feedbackMessage }}
+                  </div>
                   <div class="mb-3">
                     <label for="email" class="form-label">E-mail</label>
                     <input
@@ -75,7 +85,7 @@ function login() {
                     <a class="text-primary fw-bold" href="#">Esqueceu sua senha ?</a>
                   </div>
                   <button
-                    @click.prevent="login()"
+                  type="submit"
                     class="btn btn-primary w-100 py-8 fs-4 mb-4 rounded-2"
                   >
                     Entrar
