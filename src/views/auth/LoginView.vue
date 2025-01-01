@@ -18,7 +18,6 @@ function login() {
     authStore
       .login(email.value, password.value)
       .then(() => {
-
         router.push({ name: 'dashboard' })
       })
       .catch((e) => {
