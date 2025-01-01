@@ -5,9 +5,11 @@ import { ref } from 'vue'
 const email = ref('test@example.com')
 const password = ref('password')
 const feedbackMessage = ref('')
+const loading = ref(false)
 
 function login() {
-  feedbackMessage.value = '';
+  feedbackMessage.value = ''
+  loading.value = true
 
   axios.defaults.withCredentials = true
   axios.defaults.withXSRFToken = true
@@ -19,6 +21,9 @@ function login() {
       })
       .catch(() => {
         feedbackMessage.value = 'E-mail ou senha inválidos!'
+      })
+      .finally(() => {
+        loading.value = false
       })
   })
 }
@@ -76,19 +81,22 @@ function login() {
                     />
                   </div>
                   <div class="d-flex align-items-center justify-content-between mb-4">
-                    <div class="form-check">
-                      <!--                      <input class="form-check-input primary" type="checkbox" value="" id="flexCheckChecked" checked>-->
-                      <!--                      <label class="form-check-label text-dark" for="flexCheckChecked">-->
-                      <!--                        Remeber this Device-->
-                      <!--                      </label>-->
-                    </div>
+                    <div class="form-check"></div>
                     <a class="text-primary fw-bold" href="#">Esqueceu sua senha ?</a>
                   </div>
                   <button
-                  type="submit"
+                    type="submit"
                     class="btn btn-primary w-100 py-8 fs-4 mb-4 rounded-2"
+                    :disabled="loading"
                   >
-                    Entrar
+                    <span
+                      v-if="loading"
+                      class="spinner-border spinner-border-sm"
+                      role="status"
+                      aria-hidden="true"
+                    ></span>
+                    <span v-if="!loading">Entrar</span>
+                    <span v-if="loading"> Carregando...</span>
                   </button>
                   <div class="d-flex align-items-center justify-content-center">
                     <p class="fs-4 mb-0 fw-bold">Novo por aqui?</p>
