@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import Wrapper from '@/views/Wrapper.vue'
+import Wrapper from '@/views/WrapperLayout.vue'
 import LoginView from '@/views/auth/LoginView.vue'
 import DashboardView from '@/views/DashboardView.vue'
 
