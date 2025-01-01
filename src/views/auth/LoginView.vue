@@ -1,8 +1,8 @@
 <script setup>
 import { ref } from 'vue'
 import { useAuthStore } from '@/stores/auth.js'
-import {useRouter} from 'vue-router'
 import router from '@/router/index.js'
+import axios from 'axios'
 
 const email = ref('test@example.com')
 const password = ref('password')
@@ -18,7 +18,9 @@ function login() {
     authStore
       .login(email.value, password.value)
       .then(() => {
-        router.push({ name: 'dashboard' })
+        console.log('loguei')
+        axios.get('api/me')
+        // router.push({ name: 'dashboard' })
       })
       .catch((e) => {
         console.log(e)
