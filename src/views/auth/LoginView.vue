@@ -16,9 +16,9 @@ function login() {
 
   axios.defaults.withCredentials = true
   axios.defaults.withXSRFToken = true
-  axios.get('http://127.0.0.1:8000/sanctum/csrf-cookie').then(() => {
+  axios.get('sanctum/csrf-cookie').then(() => {
     axios
-      .post('http://127.0.0.1:8000/api/login', {
+      .post('api/login', {
         email: email.value,
         password: password.value,
       })
