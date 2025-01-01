@@ -1,31 +1,29 @@
 <script setup>
-import axios from 'axios'
 import { ref } from 'vue'
-import {useRouter} from 'vue-router'
+import { useAuthStore } from '@/stores/auth.js'
 import router from '@/router/index.js'
+import axios from 'axios'
 
 const email = ref('test@example.com')
 const password = ref('password')
 const feedbackMessage = ref('')
 const loading = ref(false)
-
+const authStore = useAuthStore()
 
 function login() {
   feedbackMessage.value = ''
   loading.value = true
 
-  axios.defaults.withCredentials = true
-  axios.defaults.withXSRFToken = true
-  axios.get('http://127.0.0.1:8000/sanctum/csrf-cookie').then(() => {
-    axios
-      .post('http://127.0.0.1:8000/api/login', {
-        email: email.value,
-        password: password.value,
+  authStore.sanctum().then(() => {
+    authStore
+      .login(email.value, password.value)
+      .then(() => {
+        console.log('loguei')
+        axios.get('api/me')
+        // router.push({ name: 'dashboard' })
       })
-      .then(()=>{
-        router.push({name:'dashboard'});
-      })
-      .catch(() => {
+      .catch((e) => {
+        console.log(e)
         feedbackMessage.value = 'E-mail ou senha inválidos!'
       })
       .finally(() => {
