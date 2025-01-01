@@ -6,10 +6,10 @@ import '@/assets/modernize/js/app.min.js'
 import '@/assets/modernize/libs/apexcharts/dist/apexcharts.min.js'
 import '@/assets/modernize/libs/simplebar/dist/simplebar.js'
 import '@/assets/modernize/js/dashboard.js'
-import Sidebar from '@/components/Sidebar.vue'
-import Footer from '@/components/Footer.vue'
+import Sidebar from '@/components/SidebarTemplate.vue'
+import Footer from '@/components/FooterTemplate.vue'
 import DashboardView from '@/views/DashboardView.vue'
-import Header from '@/components/Header.vue'
+import Header from '@/components/HeaderTemplate.vue'
 </script>
 
 <template>
